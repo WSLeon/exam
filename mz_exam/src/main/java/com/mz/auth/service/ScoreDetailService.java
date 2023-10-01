@@ -1,6 +1,7 @@
 package com.mz.auth.service;
 
 import com.mz.auth.entity.ScoreDetail;
+import com.mz.auth.entity.StuScoreVO;
 
 import java.util.List;
 
@@ -13,4 +14,10 @@ public interface ScoreDetailService {
      * @param scoreDetailList
      */
     void savePaperTestRecord(List<ScoreDetail> scoreDetailList);
+    /**
+     * 查询学生成绩
+     * @param stuScoreVO
+     * @return
+     */
+    StuScoreVO queryFrontStuScore(StuScoreVO stuScoreVO);
 }

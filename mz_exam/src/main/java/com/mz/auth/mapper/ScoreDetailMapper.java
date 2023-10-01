@@ -1,9 +1,9 @@
 package com.mz.auth.mapper;
 
 import com.mz.auth.entity.ScoreDetail;
+import com.mz.auth.entity.StuScoreVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-
 
 import java.util.List;
 
@@ -26,5 +26,12 @@ public interface ScoreDetailMapper {
             "</foreach>" +
             "</script>")
     void savePaperTestRecord(List<ScoreDetail> scoreDetailList);
+
+    /**
+     * 查询学生的成绩 使用xml方式
+     * @param stuScoreVO
+     * @return
+     */
+    StuScoreVO queryFrontStuScore(StuScoreVO stuScoreVO);
 
 }

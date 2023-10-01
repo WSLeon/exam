@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpSession;
 
 
@@ -21,12 +22,13 @@ public class StudentController {
 
     /**
      * 注册学生账号信息
+     *
      * @param student
      * @return
      */
     @RequestMapping("/stu/regStu")
     @ResponseBody
-    public MzResult regStu(Student student){
+    public MzResult regStu(Student student) {
         try {
             studentService.regStu(student);
             return MzResult.ok();
@@ -39,26 +41,35 @@ public class StudentController {
     //学生登录
     @RequestMapping("/stu/login")
     @ResponseBody
-    public MzResult login(Student student, HttpSession session){
+    public MzResult login(Student student, HttpSession session) {
 
         try {
             //判断验证码是否正确]
-            String code = (String)session.getAttribute("code");
-            if(!code.equals(student.getUsercode())){
+            String code = (String) session.getAttribute("code");
+            if (!code.equalsIgnoreCase(student.getUsercode())) {
                 return MzResult.error("验证码输入有错误!");
             }
 
-            Student stu =  studentService.login(student);
-            if(stu==null){
+            Student stu = studentService.login(student);
+            if (stu == null) {
                 return MzResult.error("用户名或者密码错误");
-            }else{
+            } else {
 
-                session.setAttribute("stuUser",stu);
+                session.setAttribute("stuUser", stu);
                 return MzResult.ok();
             }
         } catch (Exception e) {
             e.printStackTrace();
             return MzResult.error(e.getMessage());
         }
+    }
+
+    /* 退出
+     *  logOut
+     */
+    @RequestMapping("/stu/logOut")
+    public String logout(HttpSession session) {
+        session.removeAttribute("stuUser");
+        return "front/loginIndex";
     }
 }

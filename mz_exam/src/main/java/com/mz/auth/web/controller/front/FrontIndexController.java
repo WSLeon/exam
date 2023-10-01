@@ -1,11 +1,15 @@
 package com.mz.auth.web.controller.front;
 
+import com.mz.auth.query.PaperQuery;
 import com.mz.auth.service.PaperService;
 import com.mz.auth.util.CodeUtil;
+import com.mz.auth.util.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -77,5 +81,10 @@ public class FrontIndexController {
     @RequestMapping("/front/gotoRegPage")
     public String gotoRegPage(){
         return "front/regIndex";
+    }
+    @GetMapping("/paperindex/listpage")
+    @ResponseBody
+    public PageList listPage(PaperQuery paperQuery){
+        return paperService.listpage(paperQuery);
     }
 }

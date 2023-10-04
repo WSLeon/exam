@@ -65,5 +65,11 @@ public class LoginController {
     public String error403(){
         return "error403";
     }
-
+    /**
+     * 跳转后台首页页面
+     */
+    @RequestMapping("/main")
+    public String main(){
+        return "main";
+    }
 }

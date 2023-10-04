@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="模板">
+    <meta name="description" content="后台管理系统">
+    <meta name="author" content="SoulCoder">
+    <div th:include="~{views/common/include :: cssStyle }"></div>
+</head>
+<body>
+
+
+<div class="coder-layout-web">
+    <div class="coder-layout-container">
+        <!--左侧导航-->
+        <div th:include="~{views/common/include :: #asideStyle }"></div>
+        <!--End 左侧导航-->
+        <!--头部信息-->
+        <div th:include="~{views/common/include :: #headerStyle }"></div>
+        <!--End 头部信息-->
+        <!--页面主要内容-->
+        <main class="coder-layout-content">
+            <div class="container-fluid">
+            <div title="欢迎使用" style="padding:20px;overflow:hidden; color:red;  " >
+                <p style="font-size: 25px; line-height: 30px; height: 30px;">欢迎使用在线考试管理系统</p>
+<!--                <p>开发人员：陈晓东</p>-->
+<!--                <p>开发周期：2020/12/3 -&#45;&#45; 2021/2/18</p>-->
+                <hr />
+                <h2>系统环境</h2>
+                <p>系统环境：Windows</p>
+                <p>开发工具：IntelliJ IDEA 2022.1.4</p>
+                <p>Java版本：JDK 1.8</p>
+                <p>服务器：tomcat 8.5</p>
+                <p>数据库：MySQL 5.7</p>
+                <p>系统采用技术：</p>
+                <p>后台技术栈：SpringBoot+SSM+SpringSecurity等</p>
+                <p>前台技术栈：BootStrap+jQuery+Ajax+面向接口编程等</p>
+            </div>
+            </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<div th:include="~{views/common/include :: #jsStyle}"></div>
+<script type="text/javascript"  th:src="@{/static/js/jquery.serialize-object.min.js}"></script>
+</body>
+</html>

@@ -3,7 +3,9 @@ package com.mz.auth.service.impl;
 import com.mz.auth.entity.ScoreDetail;
 import com.mz.auth.entity.StuScoreVO;
 import com.mz.auth.mapper.ScoreDetailMapper;
+import com.mz.auth.query.ScoreDetailQuery;
 import com.mz.auth.service.ScoreDetailService;
+import com.mz.auth.util.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,21 @@ public class ScoreDetailServiceImpl implements ScoreDetailService {
     @Override
     public void deleteStuPaper(Long paperid, Long stuid) {
          scoreDetailMapper.deleteStuPaper(paperid,stuid);
+    }
+    /**
+     * 老师阅卷：分页查询考试记录
+     * @param scoreDetailQuery
+     * @return
+     */
+    @Override
+    public PageList listPage(ScoreDetailQuery scoreDetailQuery) {
+        PageList pageList = new PageList();
+        //查询总的条数
+        Long total = scoreDetailMapper.queryTotal(scoreDetailQuery);
+        pageList.setTotal(total);
+        //查询每页的数据
+        List<ScoreDetail> scoreDetails =  scoreDetailMapper.queryData(scoreDetailQuery);
+        pageList.setRows(scoreDetails);
+        return pageList;
     }
 }

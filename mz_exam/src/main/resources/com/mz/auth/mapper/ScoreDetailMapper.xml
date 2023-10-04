@@ -32,4 +32,42 @@
         WHERE s.id = #{stuId}
         group by es.paperId
     </select>
+    <sql id="whereSql"><!--高级查询条件-->
+        <where>
+            <if test="questionId!=null and questionId !=''">
+                and ex.questionId =#{questionId}
+            </if>
+            <if test="paperId!=null and paperId !=''">
+                and ex.paperId = #{paperId}
+            </if>
+
+        </where>
+    </sql>
+    <!--    总条数-->
+    <select id="queryTotal" parameterType="scoreDetailQuery" resultType="java.lang.Long">
+        select count(*)
+        from exam_scoredetail ex
+        join t_student s on ex.stuId=s.id
+        join exam_paper p on ex.paperId=p.id
+        <include refid="whereSql"/>
+    </select>
+    <!--    分页的数据-->
+    <select id="queryData" parameterType="scoreDetailQuery" resultMap="ScoreDetailMap">
+        select ex.*,s.id sid,s.username username,p.id pid,p.name pname
+        from exam_scoredetail ex
+        join t_student s on ex.stuId=s.id
+        join exam_paper p on ex.paperId=p.id
+        <include refid="whereSql"/>
+        order by id desc <!--按照id降序排列-->
+        limit #{offset},#{page}
+    </select>
+
+    <!--做一个结果映射 因为要用到ScoreDetai实体类里面的对象 学生和试卷，-->
+    <resultMap id="ScoreDetailMap" type="ScoreDetail">
+        <id column="id" property="id"></id>
+        <result property="student.id" column="sid"></result>
+        <result property="student.username" column="username"></result>
+        <result property="paper.id" column="pid"></result>
+        <result property="paper.name" column="pname"></result>
+    </resultMap>
 </mapper>

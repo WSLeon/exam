@@ -1,6 +1,8 @@
 package com.mz.auth.service.impl;
 
+import com.mz.auth.entity.ScoreDetail;
 import com.mz.auth.entity.User;
+import com.mz.auth.mapper.ScoreDetailMapper;
 import com.mz.auth.mapper.UserMapper;
 import com.mz.auth.query.UserQuery;
 import com.mz.auth.service.TeacherService;
@@ -16,6 +18,8 @@ import java.util.List;
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ScoreDetailMapper scoreDetailMapper;
     @Override
     public Long addTeacher(User user) {
         user.setType(2); //2代表老师
@@ -37,5 +41,14 @@ public class TeacherServiceImpl implements TeacherService {
         pageList.setRows(users);
         //封装到pageList对象里面去
         return pageList;
+    }
+    /**
+     * 老师阅卷操作
+     * @param scoreDetail
+     */
+    @Override
+    public void updateJdtScore(ScoreDetail scoreDetail) {
+
+        scoreDetailMapper.updateJdtScore(scoreDetail);
     }
 }

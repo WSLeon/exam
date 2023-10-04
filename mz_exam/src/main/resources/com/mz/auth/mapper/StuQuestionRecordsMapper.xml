@@ -37,7 +37,7 @@
                  join exam_scoredetail es on es.questionId = eq.id
                  left join exam_xzt_options ex on eq.id = ex.questionId
         where p.id = #{paperId} AND es.stuId=#{stuId}
-        order by  es.id DESC
+        order by  es.id
     </select>
     <resultMap id="StuQuestionRecordMap" type="StuPaperQuestion">
         <!--要封装的参数-->

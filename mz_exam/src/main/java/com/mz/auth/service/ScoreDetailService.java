@@ -21,5 +21,5 @@ public interface ScoreDetailService {
      */
     StuScoreVO queryFrontStuScore(StuScoreVO stuScoreVO);
     List<StuScoreVO> queryFrontAllStuScore( Long stuId);
-
+    void deleteStuPaper(Long paperid,Long stuid);
 }

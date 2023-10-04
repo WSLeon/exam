@@ -2,6 +2,7 @@ package com.mz.auth.mapper;
 
 import com.mz.auth.entity.ScoreDetail;
 import com.mz.auth.entity.StuScoreVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,5 +36,6 @@ public interface ScoreDetailMapper {
     StuScoreVO queryFrontStuScore(StuScoreVO stuScoreVO);
 
     List<StuScoreVO> queryFrontAllStuScore( Long stuId);
-
+    @Delete("delete from exam_scoredetail where paperId=#{paperid} and stuId=#{stuid}")
+    void deleteStuPaper(Long paperid,Long stuid);
 }

@@ -39,4 +39,9 @@ public class ScoreDetailServiceImpl implements ScoreDetailService {
     public List<StuScoreVO> queryFrontAllStuScore(Long stuId) {
         return scoreDetailMapper.queryFrontAllStuScore(stuId);
     }
+
+    @Override
+    public void deleteStuPaper(Long paperid, Long stuid) {
+         scoreDetailMapper.deleteStuPaper(paperid,stuid);
+    }
 }

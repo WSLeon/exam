@@ -50,8 +50,9 @@ public class FrontExamController {
      */
     @RequestMapping("/stu/examPaper")
     @ResponseBody
-    public MzResult examPaper(@RequestBody List<ScoreDetail> scoreDetails){//@RequestBody前台是json形式的数据 到后台
+    public MzResult examPaper(@RequestBody List<ScoreDetail> scoreDetails,Long paperId,Long stuId){//@RequestBody前台是json形式的数据 到后台
         try {
+            scoreDetailService.deleteStuPaper(paperId,stuId);
             scoreDetailService.savePaperTestRecord(scoreDetails);
             return MzResult.ok();
         } catch (Exception e) {

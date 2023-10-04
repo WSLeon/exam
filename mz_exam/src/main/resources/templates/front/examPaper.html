@@ -421,7 +421,7 @@
                 }
                 console.log(examPaperArr);
                 $.ajax({
-                    url: "/stu/examPaper",
+                    url: "/stu/examPaper?paperId=" + paperId + "&stuId=" + stuId,
                     async: false,
                     type: "POST",
                     data:JSON.stringify(examPaperArr),

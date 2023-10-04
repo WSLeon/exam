@@ -1,6 +1,7 @@
 package com.mz.auth.web.controller.front;
 
 import com.mz.auth.entity.ScoreDetail;
+import com.mz.auth.entity.StuPaperQuestion;
 import com.mz.auth.entity.StuScoreVO;
 import com.mz.auth.entity.Student;
 import com.mz.auth.service.PaperService;
@@ -124,8 +125,9 @@ public class StudentController {
         ScoreDetail scoreDetail = new ScoreDetail();
         scoreDetail.setStuId(stuId);
         scoreDetail.setPaperId(paperId);
+        StuPaperQuestion stuPaperQuestion = stuQuestionRecordsService.queryPaperDetail(scoreDetail);
         //把scoreDetail对象（封装了两个参数）传过去，去接口service层 去查询考卷的每个问题细节
-        System.out.println(stuQuestionRecordsService.queryPaperDetail(scoreDetail));//测试一下，删掉即可
+        System.out.println("ttttssss:"+stuPaperQuestion.toString());//测试一下，删掉即可
         //把queryPaperDetail（）方法查询出来的 存进stuPaperQuestionVO对象，等待前台调用
         model.addAttribute("stuPaperQuestionVO", stuQuestionRecordsService.queryPaperDetail(scoreDetail));
         //跳转页面

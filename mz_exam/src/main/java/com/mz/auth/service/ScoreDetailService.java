@@ -20,4 +20,6 @@ public interface ScoreDetailService {
      * @return
      */
     StuScoreVO queryFrontStuScore(StuScoreVO stuScoreVO);
+    List<StuScoreVO> queryFrontAllStuScore( Long stuId);
+
 }

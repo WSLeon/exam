@@ -18,5 +18,18 @@
         WHERE
             ep.id = #{paperId} AND s.id = #{stuId}
     </select>
-
+    <select id="queryFrontAllStuScore"  resultType="StuScoreVO">
+        SELECT
+            s.id stuId,
+            s.nickName,
+            ep.id paperId,
+            ep. NAME,
+            sum(es.correntScore) totalScore
+        FROM
+            exam_scoredetail es
+                JOIN exam_paper ep ON es.paperId = ep.id
+                JOIN t_student s ON s.id = es.stuId
+        WHERE s.id = #{stuId}
+        group by es.paperId
+    </select>
 </mapper>

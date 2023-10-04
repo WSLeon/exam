@@ -35,4 +35,8 @@ public class ScoreDetailServiceImpl implements ScoreDetailService {
     public StuScoreVO queryFrontStuScore(StuScoreVO stuScoreVO) {
         return scoreDetailMapper.queryFrontStuScore(stuScoreVO);
     }
+    @Override
+    public List<StuScoreVO> queryFrontAllStuScore(Long stuId) {
+        return scoreDetailMapper.queryFrontAllStuScore(stuId);
+    }
 }

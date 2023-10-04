@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.mz.auth.mapper.StuQuestionRecordsMapper">
+
+
+    <select id="queryPaperDetail" parameterType="ScoreDetail" resultType="StuPaperQuestion">
+        SELECT
+            s.id stuId,
+            s.nickName,
+            ep.id paperId,
+            ep. NAME,
+            es.questionId,
+            es.questionTitle,
+            es.questionAnswer stuAnswer,
+            es.correntAnswer,
+            es.q_typeid,
+            es.questionScore grade,
+            es.correntScore
+        FROM
+            exam_scoredetail es
+                JOIN exam_paper ep ON es.paperId = ep.id
+                JOIN t_student s ON s.id = es.stuId
+        WHERE
+            ep.id = #{paperId} AND s.id = #{stuId}
+            LIMIT 1
+    </select>
+</mapper>

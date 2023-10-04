@@ -4,25 +4,65 @@
 <mapper namespace="com.mz.auth.mapper.StuQuestionRecordsMapper">
 
 
-    <select id="queryPaperDetail" parameterType="ScoreDetail" resultType="StuPaperQuestion">
-        SELECT
-            s.id stuId,
-            s.nickName,
-            ep.id paperId,
-            ep. NAME,
-            es.questionId,
-            es.questionTitle,
-            es.questionAnswer stuAnswer,
-            es.correntAnswer,
-            es.q_typeid,
-            es.questionScore grade,
-            es.correntScore
-        FROM
-            exam_scoredetail es
-                JOIN exam_paper ep ON es.paperId = ep.id
-                JOIN t_student s ON s.id = es.stuId
-        WHERE
-            ep.id = #{paperId} AND s.id = #{stuId}
-            LIMIT 1
+<!--    <select id="queryPaperDetail" parameterType="ScoreDetail" resultType="StuPaperQuestion">-->
+<!--        SELECT-->
+<!--            s.id stuId,-->
+<!--            s.nickName,-->
+<!--            ep.id paperId,-->
+<!--            ep. NAME,-->
+<!--            es.questionId,-->
+<!--            es.questionTitle,-->
+<!--            es.questionAnswer stuAnswer,-->
+<!--            es.correntAnswer,-->
+<!--            es.q_typeid,-->
+<!--            es.questionScore grade,-->
+<!--            es.correntScore-->
+<!--        FROM-->
+<!--            exam_scoredetail es-->
+<!--                JOIN exam_paper ep ON es.paperId = ep.id-->
+<!--                JOIN t_student s ON s.id = es.stuId-->
+<!--        WHERE-->
+<!--            ep.id = #{paperId} AND s.id = #{stuId}-->
+<!--            LIMIT 1-->
+<!--    </select>-->
+    <!--    回顾试卷-->
+    <select id="queryPaperDetail" parameterType="ScoreDetail" resultMap="StuQuestionRecordMap">
+        select es.id esid,p.id,p.name,eq.id questionId,eq.questionTitle,es.questionAnswer,es.correntAnswer,
+                es.questionScore,es.correntScore,es.q_typeid,
+               ex.id exid,ex.optionA,ex.optionB,ex.optionC,ex.optionD,ex.questionId exquestionId
+
+        from exam_paper p
+                 join exam_paper_question ep on p.id = ep.paperId
+                 join exam_questionbank eq on eq.id = ep.questionId
+                 join exam_scoredetail es on es.questionId = eq.id
+                 left join exam_xzt_options ex on eq.id = ex.questionId
+        where p.id = #{paperId} AND es.stuId=#{stuId}
+        order by  es.id DESC
     </select>
+    <resultMap id="StuQuestionRecordMap" type="StuPaperQuestion">
+        <!--要封装的参数-->
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <!--PaperGengerateVO试卷实体表对象里面的questions问题是一个list集合类型的对象，
+  用collection标签,questions对象里面又有很多相关属性，要进行映射-->
+        <collection property="stuQuestionsList"  javaType="StuQuestionQueryVO">
+            <id column="questionId" property="questionId"></id>
+            <result column="questionTitle" property="questionTitle"></result>
+            <result column="questionAnswer" property="stuAnswer"></result>
+            <result column="correntAnswer" property="correntAnswer"></result>
+            <result column="questionScore" property="grade"></result>
+            <result column="correntScore" property="correntScore"></result>
+            <result column="q_typeid" property="q_typeid"></result>
+            <!--questions实体表对象里面又有questionXztOptions选择题实体表对象-->
+            <association property="questionXztOptions" javaType="QuestionXztOptions">
+                <id column="exid" property="id"></id>
+                <result column="optionA" property="optionA"></result>
+                <result column="optionB" property="optionB"></result>
+                <result column="optionC" property="optionC"></result>
+                <result column="optionD" property="optionD"></result>
+                <result column="exquestionId" property="questionId"></result>
+            </association>
+        </collection>
+    </resultMap>
+
 </mapper>

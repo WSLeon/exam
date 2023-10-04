@@ -14,7 +14,7 @@ public class StuQuestionQueryVO {
     private String correntAnswer;//正确答案
     private Long q_typeid;//问题类型id
     private Integer grade;//问题分数
-    private Integer correntScore;//正确得分
+    private Integer correntScore;//当前得分
     /**
      * 选择题选项  对象
      */

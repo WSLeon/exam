@@ -1,6 +1,8 @@
 package com.mz.auth.service;
 
 import com.mz.auth.entity.Student;
+import com.mz.auth.query.StudentQuery;
+import com.mz.auth.util.PageList;
 
 /**
  * @description: StudentService
@@ -19,4 +21,6 @@ public interface StudentService {
      * @return
      */
     Student login(Student student);
+    PageList listPage(StudentQuery studentQuery);
+
 }

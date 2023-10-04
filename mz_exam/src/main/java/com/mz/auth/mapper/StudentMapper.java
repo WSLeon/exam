@@ -1,9 +1,12 @@
 package com.mz.auth.mapper;
 
 import com.mz.auth.entity.Student;
+import com.mz.auth.query.StudentQuery;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @description: StudentMapper
@@ -26,4 +29,17 @@ public interface StudentMapper {
      */
     @Select("select * from t_student where username =#{username} and password=#{password}")
     Student login(Student student);
+    /**
+     * 查询总的条数
+     * @param studentQuery
+     * @return
+     */
+    Long queryTotal(StudentQuery studentQuery);
+
+    /**
+     * 查询当前页的数据
+     * @param studentQuery
+     * @return
+     */
+    List<Student> queryData(StudentQuery studentQuery);
 }

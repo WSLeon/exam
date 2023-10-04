@@ -4,18 +4,17 @@ import com.mz.auth.entity.ScoreDetail;
 import com.mz.auth.entity.StuPaperQuestion;
 import com.mz.auth.entity.StuScoreVO;
 import com.mz.auth.entity.Student;
+import com.mz.auth.query.StudentQuery;
 import com.mz.auth.service.PaperService;
 import com.mz.auth.service.ScoreDetailService;
 import com.mz.auth.service.StuQuestionRecordsService;
 import com.mz.auth.service.StudentService;
 import com.mz.auth.util.MzResult;
+import com.mz.auth.util.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -151,5 +150,21 @@ public class StudentController {
 
         model.addAttribute("allScores",  result);
         return "front/queryAllScoreIndex";
+    }
+    @GetMapping("/student/index")
+    public String index(){
+        return "views/student/student_list";
+    }
+    /**
+     * 响应老师列表分页数据的
+     * @param studentQuery
+     * @return
+     */
+    @GetMapping("/student/listpage")
+    @ResponseBody
+    public PageList listPage(StudentQuery studentQuery){
+
+        //调用userService层 listPage方法，进行分页
+        return studentService.listPage(studentQuery);
     }
 }

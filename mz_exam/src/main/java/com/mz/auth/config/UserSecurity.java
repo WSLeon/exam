@@ -7,12 +7,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Set;
 
-/**
- * @description: UserSecurity 重写实体User
- * @author:soulcoder 灵魂码仔
- * @email: 2579692606@qq.com
- * @date: created by 2020/8/21 9:03
- */
+
 public class UserSecurity extends User {
 
     @Setter

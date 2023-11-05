@@ -17,12 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @description:
- * @author: soulcoder 灵魂码仔
- * @email: 2579692606@qq.com
- * @date: created By 2020/8/20 20:04
- */
+
 @Configuration
 @EnableWebSecurity //表示开启SpringSecurity配置
 @EnableGlobalMethodSecurity(prePostEnabled = true) //开启方法的细粒度控制

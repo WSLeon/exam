@@ -18,12 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @description:
- * @author:soulcoder 灵魂码仔
- * @email: 2579692606@qq.com
- * @date: created by 2020/8/21 9:07
- */
+
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
